@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -20,35 +21,56 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public boolean guardarProducto(Producto prod) {
-        try{
-        repo.save(prod);
-        } catch (Exception e){
+        try {
+            repo.save(prod);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /* Creo que hace lo mismo que guardarProducto, así que lo dejo pero no lo uso... */
+    @Override
+    public boolean editarProducto(Producto newProducto) {
+        try {
+            repo.save(newProducto);
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
 
     @Override
-    public boolean editarProducto(Producto prod) {
-        return false;
-    }
-
-    @Override
     public boolean borrarProducto(Integer id) {
-        return false;
+        try {
+            repo.deleteById(id);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public List<Producto> obtenerProductos() {
-
-            //Convertir Iterador a Lista
-            Iterable<Producto> ite=repo.findAll();
+            /*Iterable<Producto> ite=repo.findAll();
             Iterator<Producto> it=ite.iterator();
             List<Producto> actualList = new ArrayList<Producto>();
             while (it.hasNext()) {
                 actualList.add(it.next());
-            }
+            }*/
+        List<Producto> allProductos = new ArrayList<>();
+        repo.findAll().forEach(allProductos::add);
+        return allProductos;
+    }
 
-        return actualList;
+    public Producto buscarProducto(Integer id) {
+        /* Busca el Producto por medio del ID y luego lo regresa */
+        return repo.findById(id).get();
+    }
+
+    public boolean existeProducto(Integer id) {
+        if (repo.existsById(id))
+            return true;
+        return false;
     }
 }

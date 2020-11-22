@@ -10,5 +10,7 @@ public interface ProductoService {
     public boolean editarProducto(Producto prod);
     public boolean borrarProducto(Integer id);
     public List<Producto> obtenerProductos();
+    public Producto buscarProducto(Integer id);
+    public boolean existeProducto(Integer id);
 
 }

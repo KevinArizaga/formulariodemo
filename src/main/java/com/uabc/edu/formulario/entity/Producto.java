@@ -26,4 +26,5 @@ public class Producto {
         this.precio = precio;
         this.existencia = existencia;
     }
+
 }

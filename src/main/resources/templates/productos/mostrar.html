@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Prodcutos</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table border="2">
+    <thead>
+    <tr>
+        <th th:text="#{msg.id}"></th>
+        <th th:text="#{msg.nombre}"></th>
+        <th th:text="#{msg.codigo}"></th>
+        <th th:text="#{msg.precio}"></th>
+        <th th:text="#{msg.existencia}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto: ${productos}">
+        <td th:text="${producto.getId()}"></td>
+        <td th:text="${producto.getCodigo()}"></td>
+        <td th:text="${producto.getNombre()}"></td>
+        <td th:text="${producto.getPrecio()}"></td>
+        <td th:text="${producto.getExistencia()}"></td>
+        <td><a th:href="@{/productos/modificar/{id}(id=${producto.getId()})}">Modificar</a></td>
+        <td><a th:href="@{/productos/eliminar/{id}(id=${producto.getId()})}">Eliminar</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+&nbsp;<a class="btn btn-warning" th:href="@{/productos/agregar}">Volver a agregar</a>
+
+</html>

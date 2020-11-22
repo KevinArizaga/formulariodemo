@@ -1,14 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Agregar Productos</title>
+    <title>Modificar Productos</title>
     <meta charset="UTF-8">
 </head>
 <body>
 
-<h1>Agregar Productos</h1>
+<h1>Modificar producto</h1>
 
-<form th:object="${producto}" th:action="@{/productos/agregar}" method="post">
+<form th:object="${editarProducto}" th:action="@{/productos/modificar/{id}(id=${editarProducto.getId()})}" method="post">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input th:field="*{id}" id="id" th:title="${id}" disabled type="text" class="form-control">
+    </div>
     <div class="form-group">
         <label for="nombre">Nombre del producto</label>
         <input th:field="*{nombre}" id="nombre" placeholder="Escribe el nombre del producto" type="text"
@@ -27,11 +31,10 @@
     <div class="form-group">
         <label for="precio">Precio</label>
         <input th:field="*{precio}" id="precio" placeholder="Precio del producto" type="number"
-                                           class="form-control">
+               class="form-control">
     </div>
-    <button class="btn btn-success" type="submit">Guardar</button>
+    <button class="btn btn-success" type="submit">Modificar</button>
     &nbsp;<a class="btn btn-warning" th:href="@{/productos/mostrar}">Ver todos</a>
 </form>
-
 </body>
 </html>
